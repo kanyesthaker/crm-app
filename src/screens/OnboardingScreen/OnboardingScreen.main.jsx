@@ -17,7 +17,6 @@ export default function OnboardingScreen(props) {
     return (
         <View style={styles.container}>
             <Onboarding />
-            {/* <StatusBar style="auto"/> */}
         </View>
     )
     // return (

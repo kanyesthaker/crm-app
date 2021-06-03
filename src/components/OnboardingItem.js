@@ -15,16 +15,20 @@ export default OnboardingItem = ({ item }) => {
 
 const styles = StyleSheet.create({
     container : {
-        flex : 1,
+        flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        padding: 15,
     },
     title: {
+        marginTop: "50%",
         fontSize: 50,
+        justifyContent: "center",
         textAlign: "center",
     },
     body: {
         fontSize: 25,
+        justifyContent: "center",
         textAlign: "left",
     }
 });
