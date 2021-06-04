@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, FlatList, Animated } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Animated, TouchableOpacity } from 'react-native';
 import OnboardingItem from "./OnboardingItem"
 import Paginator from "./Paginator"
+import FlatListButton from "./FlatListButton"
 
 export default Onboarding = () => {
     const [currIdx, setCurrIdx] = useState(0);
@@ -12,13 +13,22 @@ export default Onboarding = () => {
     }).current;
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50}).current;
 
+    const scroll = () => {
+        if (currIdx <= 3)
+            slidesRef.current.scrollToIndex({animated: true, index: currIdx+1});
+    }
+
+    const renderItem = ({ item }) => (<OnboardingItem item={item} index={currIdx} onClick={ scroll } />);
+
     return (
         <View style={styles.container}>
             <View style={{flex: 3}}>
                 <FlatList 
                     data={slides}
-                    renderItem={({ item }) => <OnboardingItem item={item}/>}
+                    initialNumToRender={5}
+                    renderItem={ renderItem }
                     horizontal
+                    scrollEnabled={false}
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled
                     bounces={false}
@@ -43,7 +53,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-    } 
+    },
 });
 
 const slides = [
