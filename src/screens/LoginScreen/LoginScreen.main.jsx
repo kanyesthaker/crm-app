@@ -9,6 +9,7 @@ import {
 import OnboardingScreen from '../OnboardingScreen/OnboardingScreen.main';
 import { styles } from './LoginScreen.style';
 import { firebase } from "../../firebase/config";
+import FeedScreen from '../FeedScreen/FeedScreen.main';
 
 export default function LoginScreen(props) {
     const [phoneText, onChangePhoneText] = useState(null);
@@ -30,6 +31,7 @@ export default function LoginScreen(props) {
                 style = {styles.button}
                 color = "#000"
                 backgroundColor = "#c4c4c4"
+                onPress = {()=>navigation.navigate(FeedScreen)}
             >
                 <Text>Next</Text>
             </TouchableOpacity>

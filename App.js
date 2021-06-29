@@ -8,49 +8,41 @@ import OnboardingScreen from "./src/screens/OnboardingScreen/OnboardingScreen.ma
 import FeedScreen from "./src/screens/FeedScreen/FeedScreen.main";
 import NewContactScreen from './src/screens/NewContactScreen/NewContactScreen.main';
 
-const LoginStack = createStackNavigator();
-const FeedStack = createStackNavigator();
-const RootStack = createStackNavigator();
+const MainStack = createStackNavigator();
 
-// function LoginStackScreen() {
-//   return (
-//     <LoginStack.Navigator>
-//       <LoginStack.Screen
-//         name="LoginStackScreen"
-//         component={LoginScreen}
-//         options={{
-//           title:'Login',
-//         }}
-//       />
-//       <LoginStack.Screen
-//         name="OnboardingScreen"
-//         component={OnboardingScreen}
-//         options={{
-//           title:'Onboarding',
-//         }}
-//       />
-//     </LoginStack.Navigator>
-//   )
-// }
 
-function FeedStackScreen() {
+function MainStackScreen() {
   return (
-    <FeedStack.Navigator>
-      <FeedStack.Screen
+    <MainStack.Navigator>
+      <MainStack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{
+          title:'Login',
+        }}
+      />
+      <MainStack.Screen
+        name="OnboardingScreen"
+        component={OnboardingScreen}
+        options={{
+          title:'Onboarding',
+        }}
+      />
+      <MainStack.Screen
         name="FeedScreen"
         component={FeedScreen}
         options={{
           title: 'Feed',
         }}
       />
-      <FeedStack.Screen
+      <MainStack.Screen
         name="NewContactScreen"
         component={NewContactScreen}
         options={{
           title:'New Contact',
         }}
       />
-    </FeedStack.Navigator>
+    </MainStack.Navigator>
   )
 }
 
@@ -58,7 +50,7 @@ function FeedStackScreen() {
 export default function App() {
   return (
     <NavigationContainer>{ 
-      FeedStackScreen() 
+      MainStackScreen() 
     }</NavigationContainer>
   );
 }

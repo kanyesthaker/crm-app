@@ -5,11 +5,13 @@ import Paginator from "./Paginator"
 import FlatListButton from "./FlatListButton"
 import * as Notifications from 'expo-notifications';
 import * as Contacts from 'expo-contacts';
+import FeedScreen from "../screens/FeedScreen/FeedScreen.main";
 
-export default Onboarding = () => {
+export default Onboarding = (props) => {
     const [currIdx, setCurrIdx] = useState(0);
     const [nPermission, setNPermission] = useState(null);
     const [cPermission, setCPermission] = useState(null); 
+    const { navigation } = props;
 
     const scrollX = useRef(new Animated.Value(0)).current;
     const slidesRef = useRef(null);
@@ -24,8 +26,7 @@ export default Onboarding = () => {
             console.log(cPermission);
             setCPermission(await Contacts.requestPermissionsAsync());
             console.log(cPermission);
-        }
-        else if (currIdx == "2"){
+        } else if (currIdx == "2"){
             console.log("Trying notifications permission...");
             console.log(nPermission);
             setNPermission(await Notifications.requestPermissionsAsync());
