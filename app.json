@@ -17,7 +17,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSNotificationCenterDescription": "Allow CRM App to send you notifications",
+        "NSContactsUsageDescription": "Allow CRM App to access your contacts"
+      }
     },
     "android": {
       "adaptiveIcon": {

@@ -68,14 +68,14 @@ export default OnboardingItem = ({ item, index, onClick }) => {
             case 2:
                 return (
                     <View style={styles.container}>
-                        <FlatListButton
+                        {/* <FlatListButton 
                             name="Skip"
                             onClick = { onClick }
                             style = {styles.topButton}
-                        />
+                        /> */}
                         <FlatListButton
                             name="Enable"
-                            onClick = {()=>null}
+                            onClick = {onClick}
                             style={styles.bottomButton}
                         />
                     </View>
@@ -120,17 +120,19 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#c4c4c4",
         fontSize: 25,
-        padding:15,
+        height: 40,
+        // padding:15,
     },
     topButton : {
         width: 300,
         position: "absolute",
         bottom: 85,
+        height: 40,
         alignSelf: "center",
         alignItems: "center",
         backgroundColor: "#c4c4c4",
         fontSize: 25,
-        padding:15,
+        // padding:15,
     },
     input: {
         fontSize: 25,

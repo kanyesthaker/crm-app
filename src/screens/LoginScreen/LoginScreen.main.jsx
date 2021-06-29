@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import OnboardingScreen from '../OnboardingScreen/OnboardingScreen.main';
 import { styles } from './LoginScreen.style';
+import { firebase } from "../../firebase/config";
 
 export default function LoginScreen(props) {
     const [phoneText, onChangePhoneText] = useState(null);

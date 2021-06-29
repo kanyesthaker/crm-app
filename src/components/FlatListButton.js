@@ -16,9 +16,9 @@ export default FlatListButton = ({ name, style, onClick }) => {
 }
 
 
-const styles = StyleSheet.create({
-    button : {
-        alignItems : 'center',
-        justifyContent : 'center',
-    },
-})
+// const styles = StyleSheet.create({
+//     button : {
+//         alignItems : 'center',
+//         justifyContent : 'center',
+//     },
+// })

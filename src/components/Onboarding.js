@@ -3,9 +3,14 @@ import { StyleSheet, View, Text, FlatList, Animated, TouchableOpacity } from 're
 import OnboardingItem from "./OnboardingItem"
 import Paginator from "./Paginator"
 import FlatListButton from "./FlatListButton"
+import * as Notifications from 'expo-notifications';
+import * as Contacts from 'expo-contacts';
 
 export default Onboarding = () => {
     const [currIdx, setCurrIdx] = useState(0);
+    const [nPermission, setNPermission] = useState(null);
+    const [cPermission, setCPermission] = useState(null); 
+
     const scrollX = useRef(new Animated.Value(0)).current;
     const slidesRef = useRef(null);
     const viewableItemsChanged = useRef(({viewableItems}) => {
@@ -13,19 +18,34 @@ export default Onboarding = () => {
     }).current;
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50}).current;
 
-    const scroll = () => {
-        if (currIdx <= 3)
+    const onClick = async () => {
+        if (currIdx == "1"){
+            console.log("Trying contacts permission...");
+            console.log(cPermission);
+            setCPermission(await Contacts.requestPermissionsAsync());
+            console.log(cPermission);
+        }
+        else if (currIdx == "2"){
+            console.log("Trying notifications permission...");
+            console.log(nPermission);
+            setNPermission(await Notifications.requestPermissionsAsync());
+        }
+        if (currIdx <= 3){
             slidesRef.current.scrollToIndex({animated: true, index: currIdx+1});
+        }
     }
 
-    const renderItem = ({ item }) => (<OnboardingItem item={item} index={currIdx} onClick={ scroll } />);
+    const renderItem = ({ item }) => (<OnboardingItem item={item} index={currIdx} onClick={ onClick } />);
 
     return (
         <View style={styles.container}>
             <View style={{flex: 3}}>
                 <FlatList 
                     data={slides}
+                    extraData={currIdx}
+                    disableVirtualization
                     initialNumToRender={5}
+                    removeClippedSubviews={ false }
                     renderItem={ renderItem }
                     horizontal
                     scrollEnabled={false}
