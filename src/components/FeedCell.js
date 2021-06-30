@@ -21,7 +21,7 @@ export const FeedCell = ({ feedItem }) => {
                 </Text>
                 
                 <Text style={styles.feedCellDescription}>
-                    {feedItem.description}
+                    {feedItem.relationship}
                 </Text>
             </View>
         </View>

@@ -7,8 +7,23 @@ import LoginScreen from "./src/screens/LoginScreen/LoginScreen.main";
 import OnboardingScreen from "./src/screens/OnboardingScreen/OnboardingScreen.main";
 import FeedScreen from "./src/screens/FeedScreen/FeedScreen.main";
 import NewContactScreen from './src/screens/NewContactScreen/NewContactScreen.main';
+import * as firebase from 'firebase';
 
 const MainStack = createStackNavigator();
+
+const firebaseConfig = {
+  "apiKey": "AIzaSyAVaIniwrj5BzS5neyx0vGYqjkkfbs1yxo",
+  "authDomain": "crm-app-105d2.firebaseapp.com",
+  "projectId": "crm-app-105d2",
+  "storageBucket": "crm-app-105d2.appspot.com",
+  "messagingSenderId": "752343876923",
+  "appId": "1:752343876923:web:2623a9ff2be1cb8bdee31e",
+  "measurementId": "G-451PY78WMR"
+};
+
+if (!firebase.apps.length) {
+   firebase.initializeApp(firebaseConfig);
+}
 
 
 function MainStackScreen() {

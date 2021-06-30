@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Platform, View, TextInput, Switch, Button, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import firebase from "../../firebase/config.js";
+// import firebase from "../../firebase/config.js";
+import * as firebase from 'firebase';   
 import { StackNavigationProp } from "@react-navigation/stack";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 // import { styles } from "./NewContactScreen.style"
@@ -10,8 +11,27 @@ import SegmentedControlTab from "react-native-segmented-control-tab";
 export default function NewContactScreen({ navigation }) {
     const [image, setImage] = useState(null);
     const [name, setName] = useState("");
+    const [phone, setPhone] = useState();
     const [rel, setRel] = useState(0);
     const [notifSwitch, setNotifSwitch] = useState(false);
+    const db = firebase.firestore();
+    const user = firebase.auth().currentUser;
+
+    const uid = user.uid;
+
+    const addContact = ( name, phone, rel, notifSwitch ) => {
+        db.collection("contacts")
+            .doc(uid)
+            .collection("contactDetails")
+            .doc(phone)
+            .set({
+                user:uid,
+                name:name,
+                relationship:rel,
+                notifs:notifSwitch,
+                photo:null,
+            }, {merge: true});
+    };
 
     useEffect(() => {
         (async () => {
@@ -55,7 +75,14 @@ export default function NewContactScreen({ navigation }) {
                 value = {name}
                 placeholder = "Name"
             />
-
+            <TextInput
+                onChangeText = {setPhone}
+                value = {phone}
+                autoCompleteType="tel"
+                placeholder = "+1 (949) 836 2723"
+                keyboardType = "phone-pad"
+                textContentType="telephoneNumber"
+            />
             <SegmentedControlTab
                 values={["Work", "Friend", "Family"]}
                 selectedIndex={rel}
@@ -72,6 +99,13 @@ export default function NewContactScreen({ navigation }) {
                     value={notifSwitch}
                 />
             </View>
+            <Button
+                title="Save"
+                onPress={() => {
+                    addContact(name, phone, rel, notifSwitch);
+                    navigation.goBack();
+                }}
+            />
         </View>
     );
 }
